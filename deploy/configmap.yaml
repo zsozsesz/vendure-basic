@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vendure-config
+  namespace: default
+data:
+  # Key-value pairs
+  APP_ENV: "prod"
+  APP_DEBUG: "true"
+  DATABASE_URL: "postgresql://user:password@hostname:5432/dbname"
+  APP_URL: "http://139.59.204.233"
+  POSTGRES_DB: "ecommerce"
+  POSTGRES_USER: "postgres"
+  POSTGRES_PASSWORD: "postgres"
+  POSTGRES_SCHEMA: "ecommerce"
+  POSTGRES_HOST: "postgres"
+  POSTGRES_PORT: "5432"
+  PG_ENABLED: "true"
+  PGDATA: /var/lib/postgresql/data/pgdata

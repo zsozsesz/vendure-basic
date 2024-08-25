@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vendure-worker-deployment
+  labels:
+    app: vendure-worker
+spec:
+  selector:
+    matchLabels:
+      app: vendure-worker
+  replicas: 1
+  template:
+    metadata:
+      name: vendure-worker
+      labels:
+        app: vendure-worker
+    spec:
+      containers:
+        - name: vendure-worker
+          image: registry.digitalocean.com/ecommerce-container-repo-poc/vendure:latest
+          imagePullPolicy: Always
+          command: ["npm", "run", "start:worker"]
+          envFrom:
+            - configMapRef:
+                name: vendure-config
+          ports:
+            - containerPort: 3000

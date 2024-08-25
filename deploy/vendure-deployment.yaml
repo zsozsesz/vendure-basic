@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vendure-deployment
+  labels:
+    app: vendure
+spec:
+  selector:
+    matchLabels:
+      app: vendure
+  replicas: 1
+  template:
+    metadata:
+      name: vendure
+      labels:
+        app: vendure
+    spec:
+      containers:
+        - name: vendure
+          image: registry.digitalocean.com/ecommerce-container-repo-poc/vendure:latest
+          imagePullPolicy: Always
+          command: ["npm", "run", "start:server"]
+          envFrom:
+            - configMapRef:
+                name: vendure-config
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - mountPath: /usr/src/app/static/assets
+              name: assets
+      volumes:
+        - name: assets
+          persistentVolumeClaim:
+            claimName: asset-pvc
+       
+
