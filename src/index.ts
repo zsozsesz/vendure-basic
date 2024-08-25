@@ -5,4 +5,5 @@ runMigrations(config)
     .then(() => bootstrap(config))
     .catch(err => {
         console.log(err);
+        console.log('Error running migrations');
     });
