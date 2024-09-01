@@ -19,18 +19,11 @@ spec:
         - name: vendure
           image: registry.digitalocean.com/ecommerce-container-repo-poc/vendure:latest
           imagePullPolicy: Always
-          command: ["npm", "run", "start:server"]
+          command: ['npm', 'run', 'start:server']
           envFrom:
             - configMapRef:
                 name: vendure-config
+            - secretRef:
+                name: vendure-secret
           ports:
             - containerPort: 3000
-          volumeMounts:
-            - mountPath: /usr/src/app/static/assets
-              name: assets
-      volumes:
-        - name: assets
-          persistentVolumeClaim:
-            claimName: asset-pvc
-       
-

@@ -19,9 +19,11 @@ spec:
         - name: vendure-worker
           image: registry.digitalocean.com/ecommerce-container-repo-poc/vendure:latest
           imagePullPolicy: Always
-          command: ["npm", "run", "start:worker"]
+          command: ['npm', 'run', 'start:worker']
           envFrom:
             - configMapRef:
                 name: vendure-config
+            - secretRef:
+                name: vendure-secret
           ports:
             - containerPort: 3000

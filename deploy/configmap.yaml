@@ -5,15 +5,20 @@ metadata:
   namespace: default
 data:
   # Key-value pairs
-  APP_ENV: "prod"
-  APP_DEBUG: "true"
-  DATABASE_URL: "postgresql://user:password@hostname:5432/dbname"
-  APP_URL: "http://139.59.204.233"
-  POSTGRES_DB: "ecommerce"
-  POSTGRES_USER: "postgres"
-  POSTGRES_PASSWORD: "postgres"
-  POSTGRES_SCHEMA: "ecommerce"
-  POSTGRES_HOST: "postgres"
-  POSTGRES_PORT: "5432"
-  PG_ENABLED: "true"
-  PGDATA: /var/lib/postgresql/data/pgdata
+  APP_ENV: 'prod'
+  APP_DEBUG: 'true'
+  DATABASE_URL: 'postgresql://user:password@hostname:5432/dbname'
+  APP_URL: 'http://139.59.204.233'
+  POSTGRES_DB: 'ecommerce'
+  POSTGRES_USER: 'ecommerce'
+  POSTGRES_SCHEMA: 'ecommerce'
+  POSTGRES_HOST: 'private-ecoomerce-db-postgresql-fra1-82162-do-user-17597788-0.d.db.ondigitalocean.com'
+  POSTGRES_PORT: '25060'
+  PG_ENABLED: 'true'
+  SPACES_BUCKET: 'ecommerce-storage'
+  SPACES_KEY: 'DO007GNTQMC2Q7343BRE'
+  SPACES_ENDPOINT: 'https://fra1.digitaloceanspaces.com'
+  CDN_URL: 'https://ecommerce-storage.fra1.digitaloceanspaces.com'
+  ASSET_DIR: 'static/assets'
+  USE_S3_ASSET_SERVER: 'true'
+  # PGDATA: /var/lib/postgresql/data/pgdata

@@ -3,10 +3,9 @@ kind: Service
 metadata:
   name: vendure-service
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
     - targetPort: 3000
       port: 3001
-      nodePort: 30001
   selector:
     app: vendure
