@@ -1,3 +1,4 @@
+import { compileUiExtensions } from '@vendure/ui-devkit/compiler';
 import {
   dummyPaymentHandler,
   DefaultJobQueuePlugin,
@@ -15,7 +16,7 @@ import { AdminUiPlugin } from '@vendure/admin-ui-plugin';
 import 'dotenv/config';
 import path from 'path';
 import { configureS3AssetStorage } from './plugins/asset/s3-asset-storage-strategy';
-
+import { TablePlugin } from './plugins/table/table.plugin';
 const IS_DEV = process.env.APP_ENV === 'dev';
 const serverPort = +process.env.PORT || 3000;
 
@@ -145,8 +146,14 @@ export const config: VendureConfig = {
       route: 'admin',
       port: serverPort + 2,
       adminUiConfig: {
-        apiPort: 'auto',
+        apiPort: serverPort,
       },
+      app: compileUiExtensions({
+        outputPath: path.join(__dirname, '../admin-ui'),
+        extensions: [TablePlugin.ui],
+        devMode: true,
+      }),
     }),
+    TablePlugin.init({}),
   ],
 };

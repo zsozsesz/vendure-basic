@@ -1,0 +1,98 @@
+<vdr-page-block>
+  <h2>{{ tables }}</h2>
+  <button class="button primary" (click)="showNotification()">
+    Click green
+  </button>
+  <button class="button primary" (click)="showAlert()">Click red</button>
+  <vdr-card title="Card">
+    This is a card. On a detail page, content should usually be placed inside a
+    card.
+  </vdr-card>
+</vdr-page-block>
+
+<!-- optional if you want some buttons at the top -->
+<vdr-page-block>
+  <vdr-action-bar>
+    <vdr-ab-left></vdr-ab-left>
+    <vdr-ab-right>
+      <a
+        class="btn btn-primary"
+        *vdrIfPermissions="['Createtable']"
+        [routerLink]="['./', 'create']"
+      >
+        <clr-icon shape="plus"></clr-icon>
+        Create a table
+      </a>
+    </vdr-ab-right>
+  </vdr-action-bar>
+</vdr-page-block>
+
+<!-- The data table -->
+<vdr-data-table-2
+  id="table-list"
+  [items]="items$ | async"
+  [itemsPerPage]="itemsPerPage$ | async"
+  [totalItems]="totalItems$ | async"
+  [currentPage]="currentPage$ | async"
+  [filters]="filters"
+  (pageChange)="setPageNumber($event)"
+  (itemsPerPageChange)="setItemsPerPage($event)"
+>
+  <!-- optional if you want to support bulk actions -->
+  <vdr-bulk-action-menu
+    locationId="table-list"
+    [hostComponent]="this"
+    [selectionManager]="selectionManager"
+  />
+
+  <!-- Adds a search bar -->
+  <vdr-dt2-search
+    [searchTermControl]="searchTermControl"
+    searchTermPlaceholder="Filter by title"
+  />
+
+  <!-- Here we define all the available columns -->
+  <vdr-dt2-column
+    id="id"
+    [heading]="'common.id' | translate"
+    [hiddenByDefault]="false"
+    [sort]="sorts.get('id')"
+  >
+    <ng-template let-table="item">
+      {{ table.id }}
+    </ng-template>
+  </vdr-dt2-column>
+  <vdr-dt2-column
+    id="code"
+    heading="Code"
+    [optional]="false"
+    [sort]="sorts.get('code')"
+  >
+    <ng-template let-table="item">
+      <a class="button-ghost" [routerLink]="['./', table.id]"
+        ><span>{{ table.code }}</span>
+        <clr-icon shape="arrow right"></clr-icon>
+      </a>
+    </ng-template>
+  </vdr-dt2-column>
+  <vdr-dt2-column
+    id="created-at"
+    [heading]="'common.created-at' | translate"
+    [hiddenByDefault]="false"
+    [sort]="sorts.get('createdAt')"
+  >
+    <ng-template let-table="item">
+      {{ table.createdAt | localeDate: 'short' }}
+    </ng-template>
+  </vdr-dt2-column>
+  <vdr-dt2-column
+    id="updated-at"
+    [heading]="'common.updated-at' | translate"
+    [hiddenByDefault]="false"
+    [sort]="sorts.get('updatedAt')"
+  >
+    <ng-template let-table="item">
+      {{ table.updatedAt | localeDate: 'short' }}
+    </ng-template>
+  </vdr-dt2-column>
+</vdr-data-table-2>
