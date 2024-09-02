@@ -100,10 +100,14 @@ export const config: VendureConfig = {
           username: process.env.POSTGRES_USER,
           password: process.env.POSTGRES_PASSWORD,
           schema: process.env.POSTGRES_SCHEMA,
-          ssl: {
-            rejectUnauthorized: true,
-            ca: process.env.POSTGRES_CERT,
-          },
+          ...(process.env.POSTGRES_SSL === 'true'
+            ? {
+                ssl: {
+                  rejectUnauthorized: true,
+                  ca: process.env.POSTGRES_CERT,
+                },
+              }
+            : {}),
         }
       : {
           type: 'better-sqlite3',

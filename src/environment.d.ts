@@ -19,6 +19,7 @@ declare global {
       POSTGRES_SCHEMA: string;
       PG_ENABLED: string;
       POSTGRES_CERT: string;
+      POSTGRES_SSL: string;
 
       SPACES_BUCKET: string;
       SPACES_KEY: string;
